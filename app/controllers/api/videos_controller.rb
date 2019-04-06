@@ -10,6 +10,7 @@ class Api::VideosController < ApplicationController
       render json: video
     else
       render json: video.errors, status: 422
+    end
   end
   def update
     if @video.update(video_params)
@@ -24,7 +25,7 @@ class Api::VideosController < ApplicationController
   end
   private
     def video_params
-      params.permit(:video).require(:title, :duration, :genre, :description, :trailer)
+      params.require(:video).permit(:title, :duration, :genre, :description, :trailer)
     end
     def set_video
       @video = Video.find(params[:id])
