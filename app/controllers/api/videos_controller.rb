@@ -4,6 +4,11 @@ class Api::VideosController < ApplicationController
   def index
     render json: current_user.videos.all
   end
+
+  def show
+    render json: @video
+  end
+
   def create
     @user = User.find(params[:user_id])
     video = @user.videos.new(video_params)
