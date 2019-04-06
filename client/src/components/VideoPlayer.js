@@ -25,16 +25,6 @@ class VideoPlayer extends React.Component {
     this.setState({ videos: videos.filter( c => c.id !== id ), });
   }
   
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const comment = { ...this.state, };
-  //   const { closeForm, dispatch, } = this.props;
-  //   const func = this.props.id ? updateComment : addComment;
-  //   dispatch(func(comment));
-  //   closeForm();
-  // }
-    
-
   render(video){
     return(
       
@@ -50,28 +40,6 @@ class VideoPlayer extends React.Component {
             <Button color="red" icon basic onClick={() => this.downVote(video.id)}>
               <Icon name="thumbs down" />
             </Button>
-            {/* // <div>
-            // <Form onSubmit={this.handleSubmit}>
-            // <Form.Input */}
-            {/* // name="title"
-            // required
-            // defaultValue={title}
-            // onChange={this.handleChange}
-            // label="Title"
-            // />
-            // <Form.Input
-            // name="duration"
-            // defaultValue={duration}
-            // onChange={this.handleChange}
-            // label="Duration"
-            // />
-            // <Form.Input
-            // name="genre"
-            // defaultValue={genre}
-            // onChange={this.handleChange}
-            // label="Genre"
-            // />
-          // </div> */}
         </Container>
     )
      }
