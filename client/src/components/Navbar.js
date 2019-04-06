@@ -14,7 +14,7 @@ class Navbar extends React.Component {
   Form = () =>{
     if(this.state.toogle)
     return(
-      <VideoForm user_id={this.props.auth.user.id}/>
+      <VideoForm toggle={this.toggle} user_id={this.props.auth.user.id}/>
     )
   }
 
