@@ -21,16 +21,18 @@ const {user_id, id} = this.props.match.params
     const {user_id, id} = this.props.match.params
     this.setState({video: {...this.state.video, 
       likes: this.state.video.likes + 1}})
-    // axios.put(`/api/users/${user_id}/videos/${id}`, video)
+    axios.put(`/api/users/${user_id}/videos/${id}`, video)
   }
       
 
-  // dislike = (id) => {
-    // this.setState({video: {...this.state.video, 
-    //   likes: this.state.video.likes - 1}})
-  //   const { video } = this.state;
-  //   this.setState({ videos: videos.filter( c => c.id !== id ), });
-  // }
+  dislike = () => {
+    const {video} = this.state
+    const {user_id, id} = this.props.match.params
+    this.setState({video: {...this.state.video, 
+      dislikes: this.state.video.dislikes + 1}})
+      axios.put(`/api/users/${user_id}/videos/${id}`, video)
+   
+  }
   
   // handleSubmit = (e) => {
   //   e.preventDefault();
@@ -45,10 +47,11 @@ const {user_id, id} = this.props.match.params
   render() {
     const {title, duration, description, genre, trailer} = this.state.video
     return(
-      
-        <Container>
-          <Header as='h1'/>
-          <title>{title}</title>
+      <>
+        <Container styles={{marginTop: "30px"}}>
+          <Header>
+          {title} 
+          </Header>
           <iFrame   width="100%" 
           height="350px" 
           src={trailer} 
@@ -69,11 +72,13 @@ const {user_id, id} = this.props.match.params
             <Button color="red" icon basic
             icon="thumbs down"
             label={{ as: 'a', basic: true, content: this.state.video.dislikes }}
-            labelPosition='right'>
+            labelPosition='right'
+            onClick={()=>this.dislike()}>
            
             </Button>
 
         </Container>
+        </>
     )
      }
   }

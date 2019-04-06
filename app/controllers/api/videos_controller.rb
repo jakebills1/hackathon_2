@@ -12,7 +12,6 @@ class Api::VideosController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     video = @user.videos.new(video_params)
-    binding.pry
    
     if video.save
       render json: video
@@ -35,7 +34,7 @@ class Api::VideosController < ApplicationController
   private
     def video_params
 
-      params.require(:video).permit(:title, :genre, :description, :duration, :trailer)
+      params.require(:video).permit(:title, :genre, :description, :duration, :trailer, :dislikes, :likes)
 
     end
 
