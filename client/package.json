@@ -7,8 +7,9 @@
     "devise-axios": "^1.0.24",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-iframe": "^1.5.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^2.1.8",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.86.0"
   },
