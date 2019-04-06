@@ -11,7 +11,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def create
-    comment = @Video.comment.new(comment_params)
+    comment = @video.comments.create(comment_params)
     if comment.save
       render json: comment
     else 
