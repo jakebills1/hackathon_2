@@ -1,5 +1,7 @@
 import React from 'react';
 import {Container, Button, Header, Icon} from 'semantic-ui-react';
+import CommentForm from './CommentForm'
+import Comments from './Comments'
 import axios from 'axios'
 
 class VideoPlayer extends React.Component {
@@ -76,7 +78,8 @@ const {user_id, id} = this.props.match.params
             onClick={()=>this.dislike()}>
            
             </Button>
-
+            {/* <CommentForm video_id={this.props.match.params.id} user_id={this.props.match.params.user_id}/> */}
+            <Comments video_id={this.props.match.params.id} user_id={this.props.match.params.user_id}/>
         </Container>
         </>
     )

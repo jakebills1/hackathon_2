@@ -11,7 +11,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def create
-    comment = @Video.comment.new(comment_params)
+    comment = @video.comments.create(comment_params)
     if comment.save
       render json: comment
     else 
@@ -42,5 +42,6 @@ class Api::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:likes, :dislikes, :body, :user_id)
+  end
 
 end

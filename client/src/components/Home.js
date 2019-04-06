@@ -14,7 +14,7 @@ class Home extends React.Component {
     this.resize();
    
     this.setState({...this.props.auth.user})
-    axios.get(`api/users/${this.state.id}/videos`)
+    axios.get(`api/users/${this.props.auth.user.id}/videos`)
     .then( res => {
       console.log(res)
       this.setState({videos: [...res.data]})
