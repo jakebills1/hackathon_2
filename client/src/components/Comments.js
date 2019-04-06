@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Image } from 'semantic-ui-react';
+import { Segment, Image, Button, Icon } from 'semantic-ui-react';
 import axios from 'axios';
 import CommentForm from './CommentForm'
 
@@ -16,6 +16,11 @@ class Comments extends React.Component {
     this.setState({ comments: [comment, ...this.state.comments]})
   }
   
+  handleDelete = (id) => {
+   axios.delete(`/api/videos/${this.props.video_id}/comments/${id}`).then( res => 
+    this.setState({comments: this.state.comments.filter(c => c.id !== id)
+    }))
+  }
 
   render() {
     const { comments, } = this.state;
@@ -25,9 +30,11 @@ class Comments extends React.Component {
         <Segment.Group>
           {comments.map(comment => (
             <Segment key={comment.id}>
-
+          
             <Image src='https://i.imgur.com/XLErQNQ.png' avatar />
-            {comment.body} </Segment>
+            {comment.body} 
+            <Button icon = "trash"  onClick={() => this.handleDelete(comment.id)}></Button>
+            </Segment>
           ))}
         </Segment.Group>
       </>
