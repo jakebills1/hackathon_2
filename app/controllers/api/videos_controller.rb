@@ -5,12 +5,17 @@ class Api::VideosController < ApplicationController
     render json: current_user.videos.all
   end
   def create
-    video = current_user.videos.create(video_params)
+    @user = User.find(params[:user_id])
+    video = @user.videos.new(video_params)
+    binding.pry
+   
     if video.save
       render json: video
     else
       render json: video.errors, status: 422
   end
+end
+
   def update
     if @video.update(video_params)
       render json: @video
@@ -24,8 +29,9 @@ class Api::VideosController < ApplicationController
   end
   private
     def video_params
-      params.permit(:video).require(:title, :duration, :genre, :description, :trailer)
+      params.require(:video).permit(:title, :genre, :description, :duration, :trailer)
     end
+
     def set_video
       @video = Video.find(params[:id])
     end
