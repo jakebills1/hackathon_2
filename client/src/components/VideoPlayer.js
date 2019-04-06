@@ -1,5 +1,7 @@
 import React from 'react';
 import {Container, Button, Header, Icon} from 'semantic-ui-react';
+import CommentForm from './CommentForm'
+import Comments from './Comments'
 import axios from 'axios'
 
 class VideoPlayer extends React.Component {
@@ -72,6 +74,10 @@ class VideoPlayer extends React.Component {
             // label="Genre"
             // />
           // </div> */}
+          <Header as="h3">X Comments</Header>
+          <CommentForm video_id={this.props.id} />
+          {/* TODO: index comments */}
+          <Comments video_id={this.props.id}/>
         </Container>
     )
      }
