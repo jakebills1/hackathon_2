@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Segment, Image, Button, Icon, } from 'semantic-ui-react';
+
 import axios from 'axios';
 import CommentForm from './CommentForm'
 import EditComment from './EditComment'
@@ -19,6 +21,11 @@ class Comments extends React.Component {
 
   toggleForm = () => this.setState({ showForm: !this.state.showForm})
   
+  handleDelete = (id) => {
+   axios.delete(`/api/videos/${this.props.video_id}/comments/${id}`).then( res => 
+    this.setState({comments: this.state.comments.filter(c => c.id !== id)
+    }))
+  }
 
   render() {
     const { comments, showForm } = this.state;
@@ -27,6 +34,7 @@ class Comments extends React.Component {
       <CommentForm video_id={this.props.video_id} user_id={this.props.user_id} updateComments={this.updateComments}/>
         <Segment.Group>
           {comments.map(comment => (
+
             <>
               <Segment key={comment.id}>
                 <div style={{display: "flex", justifyContent: "space-between"}}>
@@ -36,11 +44,13 @@ class Comments extends React.Component {
                 </div>
                 <div>
                   <Button icon color="blue" onClick={this.toggleForm}><Icon name="pencil" /></Button>
+                  <Button icon = "trash"  onClick={() => this.handleDelete(comment.id)}></Button>
                 </div>
                 </div>
               </Segment>
               {showForm && <EditComment {...comment} c_id={comment.id} v_id={this.props.video_id} updateComments={this.updateComments}/>}
             </>
+
           ))}
         </Segment.Group>
       </>
