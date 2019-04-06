@@ -16,7 +16,8 @@ class CommentForm extends React.Component {
       .then( res => console.log(res))
       .catch( err => console.log(err))
     this.setState( {body: ""})
-    
+    this.props.updateComments(comment)
+
   }
 
   render() {
