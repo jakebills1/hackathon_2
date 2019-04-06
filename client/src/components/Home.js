@@ -55,7 +55,7 @@ class Home extends React.Component {
           allowfullscreen
           />
           </div>
-          <Link user_id={this.state.id} id={v.id} to={{pathname: `users/${this.state.id}/videos/${this.state.id}`, state: { user_id: this.state.id, id: v.id}}}>
+          <Link user_id={this.state.id} id={v.id} to={`/users/${this.state.id}/videos/${v.id}`}>
           <Header style={{marginTop:"3px"}}>{v.title}</Header>
           </Link>
         </Grid.Column>

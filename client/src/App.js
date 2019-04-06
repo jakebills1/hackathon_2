@@ -20,7 +20,7 @@ const App = () => (
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/users/:user_id/videos/:video_id" component={VideoPlayer}/>
+          <Route exact path="/users/:user_id/videos/:id" component={VideoPlayer}/>
           <Route exact path="/video/new" component = {VideoForm} />
           <Route component={NoMatch} />
         </Switch>
