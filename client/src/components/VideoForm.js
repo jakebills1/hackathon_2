@@ -9,6 +9,7 @@ handleSubmit = (e) => {
   const {video} = this.state
   axios.post(`/api/users/${this.props.user_id}/videos`, video)
   this.props.toggle()
+  document.location.reload(true)
 }
 
 handleChange = (e) => {
@@ -46,7 +47,7 @@ render() {
       />
       <Form.Input 
       name="duration"
-      value={this.state.video.title}
+      value={this.state.video.duration}
       placeholder= "Duration"
       number
       onChange = {this.handleChange}
