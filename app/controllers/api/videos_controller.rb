@@ -43,6 +43,6 @@ class Api::VideosController < ApplicationController
     end
 
     def set_video
-      @video = Video.find(params[:video_id])
+      @video = Video.find(params[:id])
     end
 end

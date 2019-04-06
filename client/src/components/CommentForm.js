@@ -1,5 +1,6 @@
 import React from 'react'
-import { Form, Image, Button, Icon, } from 'semantic-ui-react'
+import { Form, Image, Button, Icon, } from 'semantic-ui-react';
+import axios from 'axios';
 
 class CommentForm extends React.Component {
   state = { body: "", }
@@ -10,8 +11,12 @@ class CommentForm extends React.Component {
   }
 
   handleSubmit = (e) => {
-    const comment = { body: this.state.body, video_id: "", user_id: ""}
-    debugger
+    const comment = { body: this.state.body, video_id: this.props.video_id, user_id: this.props.user_id}
+    axios.post(`/api/videos/${this.props.video_id}/comments`, comment)
+      .then( res => console.log(res))
+      .catch( err => console.log(err))
+    this.setState( {body: ""})
+    
   }
 
   render() {
