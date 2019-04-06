@@ -10,7 +10,7 @@ gem "puma", "~> 3.11"
 gem "bootsnap", ">= 1.1.0", require: false
 # Adds user authentication
 gem "devise_token_auth", "~> 1.0.0"
-
+gem "httparty"
 group :development, :test do
   # Call 'pry' anywhere in the code to stop execution and get a debugger console
   gem "pry"
