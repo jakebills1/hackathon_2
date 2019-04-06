@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Button, Header, Icon} from 'semantic-ui-react';
+import {Container, Button, Header, Icon, Dropdown} from 'semantic-ui-react';
 import axios from 'axios'
 
 class VideoPlayer extends React.Component {
@@ -25,6 +25,14 @@ class VideoPlayer extends React.Component {
     this.setState({ videos: videos.filter( c => c.id !== id ), });
   }
   
+  filterVideo = () => {
+    const {videos} = this.state;
+    videos.map(g => (
+<Dropdown.Item>{g.genre}</Dropdown.Item>
+    )
+    )
+  }
+
   render(video){
     return(
       
@@ -40,6 +48,12 @@ class VideoPlayer extends React.Component {
             <Button color="red" icon basic onClick={() => this.downVote(video.id)}>
               <Icon name="thumbs down" />
             </Button>
+            <Dropdown text="genre">
+              <Dropdown.Menu>
+                {this.filterVideo}
+              </Dropdown.Menu>
+            </Dropdown>
+
         </Container>
     )
      }
