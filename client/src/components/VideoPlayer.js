@@ -86,7 +86,7 @@ const {user_id, id} = this.props.match.params
             <Comments video_id={this.props.match.params.id} user_id={this.props.match.params.user_id}/>
         </Container>
         </>
-git    )
+      )
      }
   }
     
