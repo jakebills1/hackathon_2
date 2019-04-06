@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { Segment, Image, Button, Icon, } from 'semantic-ui-react';
-
 import axios from 'axios';
 import CommentForm from './CommentForm'
 import EditComment from './EditComment'
+import {AuthConsumer} from '../providers/AuthProvider'
 
 class Comments extends React.Component {
   state = { comments: [], showForm: false }
@@ -27,6 +26,16 @@ class Comments extends React.Component {
     }))
   }
 
+  showButtons = (cid) => {
+    if (this.props.user_id == cid) 
+   return (
+    <div>
+      <Button icon color="blue" onClick={this.toggleForm}><Icon name="pencil" /></Button>
+      <Button icon = "trash"  onClick={() => this.handleDelete(cid)}></Button>
+    </div> )
+  }
+
+
   render() {
     const { comments, showForm } = this.state;
     return (
@@ -42,10 +51,7 @@ class Comments extends React.Component {
                   <Image src='https://i.imgur.com/XLErQNQ.png' avatar />
                   {comment.body} 
                 </div>
-                <div>
-                  <Button icon color="blue" onClick={this.toggleForm}><Icon name="pencil" /></Button>
-                  <Button icon = "trash"  onClick={() => this.handleDelete(comment.id)}></Button>
-                </div>
+                {this.showButtons(comment.user_id)}
                 </div>
               </Segment>
               {showForm && <EditComment {...comment} c_id={comment.id} v_id={this.props.video_id} updateComments={this.updateComments}/>}
@@ -57,4 +63,16 @@ class Comments extends React.Component {
     )
   }
 }
-export default Comments;
+
+export class ConnectedComments extends React.Component {
+  render() {
+    return (
+      <AuthConsumer> 
+        { auth => 
+          <Comments { ...this.props } auth={auth} />
+        }
+      </AuthConsumer>
+    )
+  }
+}
+export default ConnectedComments;
