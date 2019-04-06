@@ -8,22 +8,29 @@ class VideoPlayer extends React.Component {
   };
 
   componentDidMount() {
-    axios.get(`/api/users/${this.props.user_id}/videos/${this.props.id}`)
+const {user_id, id} = this.props.match.params 
+    axios.get(`/api/users/${user_id}/videos/${id}`)
     .then(res => {
       this.setState({video: res.data})
+  
     });
 }
 
-  upvote = (id) => {
-    const { videos, } = this.state;
-    axios.put(`/api/videos/${this.props.id}`)
-      .then( () => this.setState({ videos: videos.filter( c => c.id !== id ), }) )
+  like = () => {
+    const {video} = this.state
+    const {user_id, id} = this.props.match.params
+    this.setState({video: {...this.state.video, 
+      likes: this.state.video.likes + 1}})
+    // axios.put(`/api/users/${user_id}/videos/${id}`, video)
   }
+      
 
-  downVote = (id) => {
-    const { videos, } = this.state;
-    this.setState({ videos: videos.filter( c => c.id !== id ), });
-  }
+  // dislike = (id) => {
+    // this.setState({video: {...this.state.video, 
+    //   likes: this.state.video.likes - 1}})
+  //   const { video } = this.state;
+  //   this.setState({ videos: videos.filter( c => c.id !== id ), });
+  // }
   
   // handleSubmit = (e) => {
   //   e.preventDefault();
@@ -35,43 +42,37 @@ class VideoPlayer extends React.Component {
   // }
     
 
-  render(video){
+  render() {
+    const {title, duration, description, genre, trailer} = this.state.video
     return(
       
         <Container>
           <Header as='h1'/>
-          {/* <Header href="https://youtu.be/OczABLYxDqo?list=RDOczABLYxDqo"/> */}
-          <title>{video}</title>
+          <title>{title}</title>
+          <iFrame   width="100%" 
+          height="350px" 
+          src={trailer} 
+          frameborder="0" 
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+
+          />
 
             <p>Vote On This Video</p>
-            <Button color="green" icon basic onClick={() => this.upvote(video.id)}>
+            <Button color="green" icon basic
+            icon="thumbs up"
+            label={{ as: 'a', basic: true, content: this.state.video.likes }}
+            labelPosition='right'
+            onClick={()=>this.like()}>
               <Icon name="thumbs up" />
             </Button>
-            <Button color="red" icon basic onClick={() => this.downVote(video.id)}>
-              <Icon name="thumbs down" />
+            <Button color="red" icon basic
+            icon="thumbs down"
+            label={{ as: 'a', basic: true, content: this.state.video.dislikes }}
+            labelPosition='right'>
+           
             </Button>
-            {/* // <div>
-            // <Form onSubmit={this.handleSubmit}>
-            // <Form.Input */}
-            {/* // name="title"
-            // required
-            // defaultValue={title}
-            // onChange={this.handleChange}
-            // label="Title"
-            // />
-            // <Form.Input
-            // name="duration"
-            // defaultValue={duration}
-            // onChange={this.handleChange}
-            // label="Duration"
-            // />
-            // <Form.Input
-            // name="genre"
-            // defaultValue={genre}
-            // onChange={this.handleChange}
-            // label="Genre"
-            // />
-          // </div> */}
+
         </Container>
     )
      }
