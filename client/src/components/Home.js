@@ -14,7 +14,7 @@ class Home extends React.Component {
     this.resize();
    
     this.setState({...this.props.auth.user})
-    axios.get(`api/users/${this.state.id}/videos`)
+    axios.get(`api/users/${this.props.auth.user.id}/videos`)
     .then( res => {
       console.log(res)
       this.setState({videos: [...res.data]})
@@ -55,7 +55,7 @@ class Home extends React.Component {
           allowfullscreen
           />
           </div>
-          <Link user_id={this.state.id} id={v.id} to={`users/${this.state.id}/videos/${this.state.id}`}>
+          <Link user_id={this.state.id} id={v.id} to={{pathname: `users/${this.state.id}/videos/${this.state.id}`, state: { user_id: this.state.id, id: v.id}}}>
           <Header style={{marginTop:"3px"}}>{v.title}</Header>
           </Link>
         </Grid.Column>

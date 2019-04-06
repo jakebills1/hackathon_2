@@ -7,7 +7,6 @@ class Api::VideosController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     video = @user.videos.new(video_params)
-    binding.pry
    
     if video.save
       render json: video
@@ -15,7 +14,10 @@ class Api::VideosController < ApplicationController
       render json: video.errors, status: 422
     end
   end
-end
+
+  def show
+    render json: @video
+  end
 
   def update
     if @video.update(video_params)
@@ -36,6 +38,6 @@ end
     end
 
     def set_video
-      @video = Video.find(params[:id])
+      @video = Video.find(params[:video_id])
     end
 end

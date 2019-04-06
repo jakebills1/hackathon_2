@@ -10,7 +10,7 @@ class VideoPlayer extends React.Component {
   };
 
   componentDidMount() {
-    axios.get(`/api/users/${this.props.user_id}/videos/${this.props.id}`)
+    axios.get(`/api/users/${this.props.match.params.user_id}/videos/${this.props.match.params.id}`)
     .then(res => {
       this.setState({video: res.data})
     });
