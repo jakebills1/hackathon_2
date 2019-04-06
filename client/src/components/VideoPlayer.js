@@ -1,24 +1,24 @@
 import React from 'react';
-import {Container, Button,} from 'semantic-ui-react';
+import {Container, Button, Header, Icon} from 'semantic-ui-react';
 import axios from 'axios'
 
-class Video_Player extends React.Component {
+class VideoPlayer extends React.Component {
   state = {
-    video = "",
-    title = "",
-    duration = "",
-    genre = "",
+    video: "",
+    title: "",
+    duration: "",
+    genre: "",
   };
 
-  componentDidMount() {
-    axios.get(`/api/user.${id}`)
-    .then(res => {
-      this.setState{video: id}
-    });
-}
+//   componentDidMount() {
+//     axios.get(`/api/user/${id}/video/${id}`)
+//     .then(res => {
+//       this.setState{video: video}
+//     });
+// }
 
 
-  }
+  
 
   upvote = (id) => {
     const { videos, } = this.state;
@@ -41,13 +41,13 @@ class Video_Player extends React.Component {
   // }
     
 
-  render()
-    return{
+  render(video){
+    return(
       
         <Container>
           <Header as='h1'/>
-          // <Header as='href'/>
-          <Title>{video_player}</Title>
+          {/* // <Header as='href'/> */}
+          <title>{video}</title>
 
             <p>Rock & Or Roll!</p>
             <Button color="green" icon basic onClick={() => this.upvote(video.id)}>
@@ -56,10 +56,10 @@ class Video_Player extends React.Component {
             <Button color="red" icon basic onClick={() => this.downVote(video.id)}>
               <Icon name="thumbs down" />
             </Button>
-            // <div>
+            {/* // <div>
             // <Form onSubmit={this.handleSubmit}>
-            // <Form.Input
-            // name="title"
+            // <Form.Input */}
+            {/* // name="title"
             // required
             // defaultValue={title}
             // onChange={this.handleChange}
@@ -77,10 +77,10 @@ class Video_Player extends React.Component {
             // onChange={this.handleChange}
             // label="Genre"
             // />
-          // </div>
+          // </div> */}
         </Container>
-
-    }
+    )
+     }
+  }
     
-}
-export default Video_Player
+export default VideoPlayer;
