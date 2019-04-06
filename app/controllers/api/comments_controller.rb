@@ -42,5 +42,5 @@ class Api::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:likes, :dislikes, :body, :user_id)
-
+  end
 end
