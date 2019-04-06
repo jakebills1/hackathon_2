@@ -5,10 +5,10 @@ import axios from "axios"
 class VideoForm extends React.Component {
 state= {video: {title: "", duration: "", genre: "", description: "", trailer: ""}}
 
-handleSubmit = () => {
+handleSubmit = (e) => {
   const {video} = this.state
-  const {user_id} = this.props
-  axios.post(`/api/users/${user_id}/videos`)
+  axios.post(`/api/users/${this.props.user_id}/videos`, video)
+  this.props.toggle()
 }
 
 handleChange = (e) => {
@@ -22,35 +22,36 @@ render() {
     <Form>
       <Form.Input 
       name="title"
-      value={this.state.title}
+      value={this.state.video.title}
       placeholder= "Title"
       onChange = {this.handleChange}
       />
       <Form.Input 
       name="genre"
-      value={this.state.genre}
+      value={this.state.video.genre}
       placeholder= "Genre"
       onChange = {this.handleChange}
       />
       <Form.Input 
       name="description"
-      value={this.state.description}
+      value={this.state.video.description}
       placeholder= "Description"
       onChange = {this.handleChange}
       />
       <Form.Input 
       name= "trailer"
-      value={this.state.trailer}
+      value={this.state.video.trailer}
       placeholder= "Copy/Paster URL here"
       onChange = {this.handleChange}
       />
       <Form.Input 
       name="duration"
-      value={this.state.title}
+      value={this.state.video.title}
       placeholder= "Duration"
       number
       onChange = {this.handleChange}
       />
+      <Button onClick={this.handleSubmit}>Save</Button>
     </Form>
   )}
 
