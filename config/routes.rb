@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :users do 
       resources :videos
     end
+    resources :videos do
+      resources :comments
+    end
   end
 
-  resources :videos
 end
