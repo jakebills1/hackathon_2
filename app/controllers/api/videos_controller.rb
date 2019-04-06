@@ -13,6 +13,7 @@ class Api::VideosController < ApplicationController
       render json: video
     else
       render json: video.errors, status: 422
+    end
   end
 end
 
@@ -29,7 +30,9 @@ end
   end
   private
     def video_params
+
       params.require(:video).permit(:title, :genre, :description, :duration, :trailer)
+
     end
 
     def set_video
